@@ -8,6 +8,7 @@ const prodConfig = {
   mode: "production",
   output: {
     filename: "[name].[contenthash].js",
+    publicPath: "/container/latest/", // Point to the latest version of our container
   },
   plugins: [
     new ModuleFederationPlugin({
