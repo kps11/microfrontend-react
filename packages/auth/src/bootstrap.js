@@ -4,7 +4,17 @@ import { createMemoryHistory, createBrowserHistory } from "history";
 import App from "./App";
 
 //Mount function to start up the app
-const mount = (el, { onNavigate, defaultHistory, initialPath, onSignIn }) => {
+const mount = (
+  el,
+  {
+    onNavigate,
+    defaultHistory,
+    initialPath,
+    onSignIn,
+    isSuccessLogin,
+    successLogin,
+  }
+) => {
   console.log(initialPath); // eslint-disable-line
   const history =
     defaultHistory ||
@@ -15,11 +25,18 @@ const mount = (el, { onNavigate, defaultHistory, initialPath, onSignIn }) => {
   onNavigate && history.listen(onNavigate);
 
   //Rendering the main component
-  ReactDOM.render(<App history={history} onSignIn={onSignIn} />, el);
+  ReactDOM.render(
+    <App
+      history={history}
+      onSignIn={onSignIn}
+      isSuccessLogin={isSuccessLogin}
+      successLogin={successLogin}
+    />,
+    el
+  );
 
   return {
     onParentNavigation: ({ pathname: nextPathName }) => {
-      console.log("auth");
       const { pathname } = history.location;
       if (pathname !== nextPathName) {
         history.push(nextPathName);

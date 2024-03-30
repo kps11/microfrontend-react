@@ -1,10 +1,11 @@
-import { mount } from "auth/AuthApp";
+import { mount } from "dashboard/DashboardApp";
 import { useHistory } from "react-router-dom";
 import React, { useEffect, useRef } from "react";
 
-export default ({ onSignIn, isSuccessLogin, successLogin }) => {
+export default ({ onSignIn, successLogin }) => {
   const ref = useRef(null);
   const history = useHistory();
+  console.log("dashboard app");
   useEffect(() => {
     const { onParentNavigation } = mount(ref.current, {
       initialPath: history.location.pathname,
@@ -16,9 +17,6 @@ export default ({ onSignIn, isSuccessLogin, successLogin }) => {
       },
       onSignIn: () => {
         onSignIn();
-      },
-      isSuccessLogin: () => {
-        isSuccessLogin();
       },
       successLogin: successLogin,
     });
